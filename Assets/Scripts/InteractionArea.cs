@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class ScoreCounter : MonoBehaviour
+
+public class InteractionArea : MonoBehaviour
 {
     public Text txtScore;
     public int score;
@@ -15,17 +16,12 @@ public class ScoreCounter : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (score < MaxScore)
-        {
             Debug.Log("Contacto");
             AlimentoScript alimento;
             alimento = collision.gameObject.GetComponent<AlimentoScript>();
             score += alimento.valorAlimentario;
             txtScore.text = score.ToString();
-        }
-        else
-        {
-            txtScore.text = "GANASTE";
-        }
+            Destroy(collision.gameObject);
+
     }
 }
